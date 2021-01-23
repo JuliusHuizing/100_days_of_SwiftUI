@@ -12,20 +12,20 @@ struct OrderDetails: View {
     var body: some View {
         Form {
             Section {
-                TextField("Name", text: $order.name)
+                TextField("Name", text: $order.content.name)
             }
             Section {
-                TextField("City", text: $order.city)
-                TextField("Zip Code", text: $order.zip)
-                TextField("Adress", text: $order.adress)
+                TextField("City", text: $order.content.city)
+                TextField("Zip Code", text: $order.content.zip)
+                TextField("Adress", text: $order.content.adress)
                 
             }
             Section {
-                TextField("Special remarks", text: $order.specialRemarks)
+                TextField("Special remarks", text: $order.content.specialRemarks)
             }
             Section {
                 NavigationLink("Checkout", destination: CheckoutView(order: order))
-                    .disabled(!order.enoughInformationProvided)
+                    .disabled(!order.content.enoughInformationProvided)
             }
         }.navigationBarTitle("Order Details")
     }

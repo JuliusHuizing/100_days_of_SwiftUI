@@ -13,11 +13,11 @@ struct CheckoutView: View {
     @State var showingConfirmation = false
     var body: some View {
         Form {
-            Text("Total Cost: $ \(order.totalCost)")
+            Text("Total Cost: $ \(order.content.totalCost)")
 
             Section {
-                Text("Number of cupcakes: \(order.quantity)")
-                Text("Comment: \(order.specialRemarks)")
+                Text("Number of cupcakes: \(order.content.quantity)")
+                Text("Comment: \(order.content.specialRemarks)")
             }
             
             Button("Place order", action: placeOrder)
@@ -46,7 +46,7 @@ struct CheckoutView: View {
             }
             // Check whether response from reqres can be decoded again.
             if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
-                self.confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.typeIdx].lowercased()) cupcakes is on its way!"
+                self.confirmationMessage = "Your order for \(decodedOrder.content.quantity)x \(OrderContent.types[decodedOrder.content.typeIdx].lowercased()) cupcakes is on its way!"
                 self.showingConfirmation = true
 
             } else {
